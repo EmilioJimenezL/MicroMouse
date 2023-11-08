@@ -1,6 +1,7 @@
 package MicroMouse;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Raton {
@@ -46,7 +47,34 @@ public class Raton {
         return lista;
     }
 
+    Punto getBestVecino(List<Punto> puntos){
+
+
+
+    }
+
     public List<Punto> encontrarMejorCamino() {
+        //LinkedList<Punto> movimientos = new LinkedList<Punto>();
+        List<Punto> movimientos = new ArrayList<Punto>();
+
+        Punto previous = inicio;
+        Punto current = inicio;
+        int count = 0;
+        while(true){
+            List<Punto> vecinos = getVecinos(mapaOriginal, current);
+            if(vecinos.isEmpty()){
+                System.out.println("PUNTO MUERTOOOO");
+            }
+
+            count++;
+
+            if(count > 6){
+                break;
+            }
+
+
+        }
+
         //TODO encontrarMejorCamino
         return listaDeMovimientos;
     }
