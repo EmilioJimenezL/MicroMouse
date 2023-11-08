@@ -63,15 +63,24 @@ public class Raton {
             System.out.println("Nuevo valor flood: ");
             System.out.println(mapaFlood[current.getY()][current.getX()]);
             List<Punto> vecinos = getVecinos(current);
-            if(vecinos.size() == 1){
+            if(vecinos.size() == 1 && mapaOriginal[current.getY()][current.getX()] != 'S'){
                 System.out.println("PUNTO MUERTOOOO");
                 mapaFlood[current.getY()][current.getX()] = 2 * mapaFlood.length;
+                int i = listaDeMovimientos.size()-1;
+                while (this.getVecinos(listaDeMovimientos.get(i)).size() < 3){
+                    System.out.println("Regresando a interseccion");
+                    listaDeMovimientos.remove(i);
+                    i--;
+                }
+                current = listaDeMovimientos.get(i-1);
             }
             siguiente = encontrarMejorPaso(current);
             this.listaDeMovimientos.add(new Punto(siguiente));
             current = siguiente;
             System.out.println("El raton se mueve a: ");
             System.out.println(current);
+            System.out.println("El raton ha caminado:");
+            System.out.println(listaDeMovimientos.size());
             Scanner scanner = new Scanner(System.in);
             //scanner.nextLine();
         }
