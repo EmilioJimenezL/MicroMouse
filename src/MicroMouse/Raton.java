@@ -18,16 +18,6 @@ public class Raton {
         this.inicio = ini;
         this.fin = fin;
     }
-
-    /**
-     *
-     * @param mapa
-     * @param punto
-     * @return empty list if it is a dead point,
-     * otherwise returns list of available neighbours that are not walls.
-     * It does NOT take into account whether neighbours have already been
-     * visited.
-     */
     public List<Punto> getVecinos(Punto punto) {
         List<Punto> lista = new ArrayList<>();
         lista.add(new Punto(punto.getX() + 1, punto.getY()));
@@ -49,13 +39,15 @@ public class Raton {
         List<Punto> vecinos = this.getVecinos(currentPos);
         currentPos = vecinos.get(0);
         for (int i = 0; i < vecinos.size(); i++) {
-            if (vecinos.get(i).getManhattanDistance(fin) < currentPos.getManhattanDistance(fin)) {
+            if (this.mapaFlood[vecinos.get(i).getY()][vecinos.get(i).getX()] < this.mapaFlood[currentPos.getY()][currentPos.getX()]) {
                 currentPos = vecinos.get(i);
                 System.out.println("Nuevo vecino elegido");
             }
         }
         System.out.println("El mejor siguiente paso es: ");
         System.out.println(currentPos);
+        System.out.println("Ya que su distancia manhattan es:");
+        System.out.println(this.mapaFlood[currentPos.getY()][currentPos.getX()]);
         return currentPos;
     }
     public List<Punto> encontrarMejorCamino() {
@@ -81,7 +73,7 @@ public class Raton {
             System.out.println("El raton se mueve a: ");
             System.out.println(current);
             Scanner scanner = new Scanner(System.in);
-            scanner.nextLine();
+            //scanner.nextLine();
         }
         //TODO encontrarMejorCamino
         return listaDeMovimientos;
