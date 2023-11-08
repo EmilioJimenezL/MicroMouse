@@ -9,7 +9,6 @@ public class Raton {
     private int[][] mapaFlood;
     Punto inicio, fin;
     List<Punto> listaDeMovimientos = new ArrayList<Punto>();
-
     public Raton(char[][] mapaO, int[][] mapaF, Punto ini, Punto fin) {
         this.mapaOriginal = mapaO;
         this.mapaFlood = mapaF;
@@ -26,52 +25,51 @@ public class Raton {
      * It does NOT take into account whether neighbours have already been
      * visited.
      */
-    public List<Punto> getVecinos(char[][] mapa, Punto punto) {
-        List<Punto> lista = new ArrayList<Punto>();
+    public List<Punto> getVecinos(Punto punto) {
+        List<Punto> lista = new ArrayList<>();
         lista.add(new Punto(punto.getX() + 1, punto.getY()));
         lista.add(new Punto(punto.getX(), punto.getY() - 1));
         lista.add(new Punto(punto.getX() - 1, punto.getY()));
         lista.add(new Punto(punto.getX(), punto.getY() + 1));
         for (int i = lista.size()-1; i >= 0 ; i--) {
-            if (!lista.get(i).isValidPoint(mapa)) {
-                System.out.printf("%s NO es valido.\n", lista.get(i));
+            if (!lista.get(i).isValidPoint(this.mapaOriginal)) {
                 lista.remove(i);
-            } else {
-                System.out.printf("%s SI es valido.\n", lista.get(i));
-
             }
         }
-        if(lista.size() == 1){
+        /*if(lista.size() == 1){
             lista.remove(0);
-        }
+        }*/
         return lista;
     }
     public Punto encontrarMejorPaso(Punto currentPos){
-        List<Punto> vecinos = this.getVecinos(this.mapaOriginal, currentPos);
-        int currentD = currentPos.getManhattanDistance(fin);
+        List<Punto> vecinos = this.getVecinos(currentPos);
         for (int i = 0; i < vecinos.size(); i++) {
-            if (vecinos.get(i).getManhattanDistance(fin) < currentD) {
+            if (vecinos.get(i).getManhattanDistance(fin) < currentPos.getManhattanDistance(fin)) {
                 currentPos = vecinos.get(i);
-                currentD = currentPos.getManhattanDistance(fin);
             }
         }
         return currentPos;
     }
     public List<Punto> encontrarMejorCamino() {
-        LinkedList<Punto> movimientos = new LinkedList<Punto>();
-        List<Punto> movimientos = new ArrayList<Punto>();
-        Punto previous = inicio;
         Punto current = inicio;
-        int count = 0;
-        while(true){
-            List<Punto> vecinos = getVecinos(mapaOriginal, current);
-            if(vecinos.isEmpty()){
+        System.out.println("El raton inicia en: ");
+        System.out.println(inicio);
+        Punto siguiente;
+        this.listaDeMovimientos.add(current);
+        while(this.mapaOriginal[current.getY()][current.getX()] != 'F'){
+            List<Punto> vecinos = getVecinos(current);
+            if(vecinos.size() == 1){
                 System.out.println("PUNTO MUERTOOOO");
+                mapaFlood[current.getY()][current.getX()] = 2 * mapaFlood.length;
             }
-            count++;
-            if(count > 6){
-                break;
-            }
+            siguiente = encontrarMejorPaso(current);
+            this.listaDeMovimientos.add(new Punto(siguiente));
+            mapaFlood[current.getY()][current.getX()]++;
+            System.out.println("Nuevo valor flood: ");
+            System.out.println(mapaFlood[current.getY()][current.getX()]);
+            current = siguiente;
+            System.out.println("El raton se mueve a: ");
+            System.out.println(current);
         }
         //TODO encontrarMejorCamino
         return listaDeMovimientos;

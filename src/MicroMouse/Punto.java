@@ -16,6 +16,10 @@ public class Punto {
         this.y = y;
 
     }
+    public Punto(Punto punto){
+        this.x = punto.x;
+        this.y = punto.y;
+    }
     public boolean isValidPoint(char[][] mapaOriginal){
         return !(this.x < 0 || this.x >= mapaOriginal.length ||
                 this.y < 0 || this.y >= mapaOriginal.length || mapaOriginal[this.y][this.x] == '1' );
