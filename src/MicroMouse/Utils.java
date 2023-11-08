@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Utils {
     private String pathCarpeta = "maps/";
-    private String nombreArchivo = "LABTest.txt";
+    private String nombreArchivo = "LaberintoEjemplo.txt";
     private String linea;
     private List<String> buffer =  new ArrayList<String>();
     private File archivoMapa;

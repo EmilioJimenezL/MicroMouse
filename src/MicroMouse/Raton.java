@@ -63,7 +63,7 @@ public class Raton {
             }
             siguiente = encontrarMejorPaso(current);
             this.listaDeMovimientos.add(new Punto(siguiente));
-            mapaFlood[current.getY()][current.getX()]+=2;
+            mapaFlood[current.getY()][current.getX()]+=5;
             System.out.println("Nuevo valor flood: ");
             System.out.println(mapaFlood[current.getY()][current.getX()]);
             current = siguiente;

@@ -47,7 +47,6 @@ public class Laberinto {
                 finalMasCercano.setY(fin[i].getY());
             }
         }
-        System.out.println(finalMasCercano);
         return this.finalMasCercano;
     }
 
