@@ -69,6 +69,7 @@ public class Raton {
                 int i = listaDeMovimientos.size()-1;
                 while (this.getVecinos(listaDeMovimientos.get(i)).size() < 3){
                     System.out.println("Regresando a interseccion");
+                    mapaFlood[current.getY()][current.getX()] = 2*mapaFlood.length;
                     listaDeMovimientos.remove(i);
                     i--;
                 }
