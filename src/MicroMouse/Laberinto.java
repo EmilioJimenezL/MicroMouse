@@ -6,7 +6,7 @@ public class Laberinto {
     private char[][] mapaOriginal;
     private int[][] mapaFlood;
     private Punto inicio = new Punto();
-    private Punto[] fin = new Punto[4];
+    private Punto[] fin;
     private Punto finalMasCercano = new Punto();
 
     public Laberinto (char[][] mapa){
@@ -25,10 +25,22 @@ public class Laberinto {
         return this.inicio;
     }
     public Punto[] encontrarFin(){
+        int finCount = 0;
+        for (int i = 0; i < mapaOriginal.length; i++) {
+            for (int j = 0; j < mapaOriginal[i].length; j++) {
+                if (mapaOriginal[i][j] == 'F') {
+                    finCount++;
+                }
+            }
+        }
+        fin = new Punto[finCount];
+        System.out.printf("FIN COUNT is %d\n", finCount);
+
         int k = 0;
         for (int i = 0; i < mapaOriginal.length; i++) {
             for (int j = 0; j < mapaOriginal[i].length; j++) {
                 if (mapaOriginal[i][j] == 'F') {
+                    System.out.printf("Final encontrado en %d, %d\n", j, i);
                     this.fin[k] = new Punto(j, i);
                     k++;
                 }
@@ -36,6 +48,7 @@ public class Laberinto {
         }
         return this.fin;
     }
+
     public Punto encontrarFinalMasCercano(){
         int minD = Math.abs(inicio.getX()-fin[0].getX()) + Math.abs(inicio.getY() - fin[0].getY());
         finalMasCercano.setX(fin[0].getX());
@@ -51,9 +64,10 @@ public class Laberinto {
     }
 
     public int[][] convertirAFlood(){
+        System.out.println("FINAL ES: " + finalMasCercano);
         for(int i = 0; i < mapaOriginal.length; i++){
             for (int j = 0; j < mapaOriginal[0].length; j++) {
-                Punto punto = new Punto(i, j);
+                Punto punto = new Punto(j, i);
                 this.mapaFlood[i][j] = punto.getManhattanDistance(finalMasCercano);
                 if(mapaOriginal[i][j] == '1'){
                     mapaFlood[i][j] = 2*mapaOriginal.length;

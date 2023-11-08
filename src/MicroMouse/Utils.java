@@ -60,7 +60,7 @@ public class Utils {
     public static void escribirMovimientos(List<String> movimientos, String nombreArchivo){
         FileWriter fileWriter = null;
         PrintWriter printWriter = null;
-        File archivo = new File("maps\\"+ nombreArchivo + ".txt");
+        File archivo = new File("maps/"+ nombreArchivo + ".txt");
         if (archivo.exists()) {
             System.out.println("Ya existe el archivo, sobreescribiendo...");
             try {

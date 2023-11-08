@@ -9,7 +9,9 @@ public class Main {
         Laberinto laberinto = new Laberinto(mapa);
         laberinto.encontrarInicio();
         laberinto.encontrarFin();
-        laberinto.encontrarFinalMasCercano();
+        Punto finMasCercano = laberinto.encontrarFinalMasCercano();
+        System.out.println("FIN mas cercano: " + finMasCercano);
+
         int[][] floodmap = laberinto.convertirAFlood();
         laberinto.printFloodMap();
         Punto inicio = laberinto.encontrarInicio();
