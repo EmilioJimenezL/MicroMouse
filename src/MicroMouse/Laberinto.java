@@ -26,7 +26,6 @@ public class Laberinto {
     }
     public Punto[] encontrarFin(){
         int k = 0;
-
         for (int i = 0; i < mapaOriginal.length; i++) {
             for (int j = 0; j < mapaOriginal[i].length; j++) {
                 if (mapaOriginal[i][j] == 'F') {
@@ -42,23 +41,23 @@ public class Laberinto {
         finalMasCercano.setX(fin[0].getX());
         finalMasCercano.setY(fin[0].getY());
         for (int i = 1; i < fin.length; i++) {
-            //int currentD = Math.abs(inicio.getX()-fin[i].getX()) + Math.abs(inicio.getY() - fin[i].getY());
             int currentD = inicio.getManhattanDistance(fin[i]);
             if (currentD < minD) {
                 finalMasCercano.setX(fin[i].getX());
                 finalMasCercano.setY(fin[i].getY());
             }
         }
+        System.out.println(finalMasCercano);
         return this.finalMasCercano;
     }
 
     public int[][] convertirAFlood(){
         for(int i = 0; i < mapaOriginal.length; i++){
             for (int j = 0; j < mapaOriginal[0].length; j++) {
+                Punto punto = new Punto(i, j);
+                this.mapaFlood[i][j] = punto.getManhattanDistance(finalMasCercano);
                 if(mapaOriginal[i][j] == '1'){
                     mapaFlood[i][j] = 2*mapaOriginal.length;
-                } else {
-                    mapaFlood[i][j] = finalMasCercano.getManhattanDistance(new Punto(j, i));
                 }
             }
         }

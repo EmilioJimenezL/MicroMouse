@@ -36,9 +36,6 @@ public class Raton {
                 lista.remove(i);
             }
         }
-        /*if(lista.size() == 1){
-            lista.remove(0);
-        }*/
         return lista;
     }
     public Punto encontrarMejorPaso(Punto currentPos){
@@ -57,6 +54,8 @@ public class Raton {
         Punto siguiente;
         this.listaDeMovimientos.add(current);
         while(this.mapaOriginal[current.getY()][current.getX()] != 'F'){
+            System.out.println("Valor flood original:");
+            System.out.println(mapaFlood[current.getY()][current.getX()]);
             List<Punto> vecinos = getVecinos(current);
             if(vecinos.size() == 1){
                 System.out.println("PUNTO MUERTOOOO");
@@ -64,7 +63,7 @@ public class Raton {
             }
             siguiente = encontrarMejorPaso(current);
             this.listaDeMovimientos.add(new Punto(siguiente));
-            mapaFlood[current.getY()][current.getX()]++;
+            mapaFlood[current.getY()][current.getX()]+=2;
             System.out.println("Nuevo valor flood: ");
             System.out.println(mapaFlood[current.getY()][current.getX()]);
             current = siguiente;
