@@ -16,23 +16,16 @@ public class Punto {
         this.y = y;
 
     }
-    public boolean isValidPoint(int mapLength){
-        return !(this.x < 0 || this.x >= mapLength ||
-                this.y < 0 || this.y >= mapLength);
+    public boolean isValidPoint(char[][] mapaOriginal){
+        return !(this.x < 0 || this.x >= mapaOriginal.length ||
+                this.y < 0 || this.y >= mapaOriginal.length || mapaOriginal[this.y][this.x] == '1' );
     }
-    public List<Punto> getVecinos(char[][] mapa) {
-        List<Punto> lista = new ArrayList<Punto>();
-        lista.add(new Punto(this.x + 1, this.y));
-        lista.add(new Punto(this.x, this.y - 1));
-        lista.add(new Punto(this.x - 1, this.y));
-        lista.add(new Punto(this.x, this.y + 1));
-        for (int i = 0; i < lista.size(); i++) {
-            if (!lista.get(i).isValidPoint(mapa.length)) {
-                lista.remove(i);
-            }
-        }
-        return lista;
-    }
+
+    /**
+     *      * 1. Consigue los puntos validos dentro de coordenadas
+     *      * 2. Checa si alguno de ellos es una pared
+     *      * 3. Consigue el del menor valor en el mapa Flood
+     */
     public int getManhattanDistance(Punto a){
         return Math.abs(this.x - a.getX()) + Math.abs(this.y - a.getY());
     }
@@ -53,6 +46,6 @@ public class Punto {
 
     @Override
     public String toString(){
-        return String.format("(%d, %d)\n", x, y);
+        return String.format("(%d, %d)", x, y);
     }
 }

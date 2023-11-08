@@ -1,5 +1,7 @@
 package MicroMouse;
 
+import java.awt.*;
+
 public class Laberinto {
     private char[][] mapaOriginal;
     private int[][] mapaFlood;
@@ -67,7 +69,16 @@ public class Laberinto {
     public void printFloodMap(){
         for(int i = 0; i < mapaFlood.length; i++){
             for(int j = 0; j < mapaFlood[0].length; j++){
-                System.out.printf("%d ", mapaFlood[i][j]);
+                System.out.printf("%d\t", mapaFlood[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public void printIsValidPointMap(){
+        for(int i = 0; i < mapaFlood.length; i++){
+            for(int j = 0; j < mapaFlood[0].length; j++){
+                System.out.printf("%b\t", new Punto(j, i).isValidPoint(mapaOriginal));
             }
             System.out.println();
         }

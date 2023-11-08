@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
-    private String pathCarpeta = "C:\\";
-    private String nombreArchivo = "LaberintoEjemplo.txt";
+    private String pathCarpeta = "maps/";
+    private String nombreArchivo = "LABTest.txt";
     private String linea;
     private List<String> buffer =  new ArrayList<String>();
     private File archivoMapa;
@@ -45,5 +45,6 @@ public class Utils {
     public static char encontrarCaracter (char[][] mapa, Punto coordenada){
         return mapa[coordenada.getY()][coordenada.getX()];
     }
+
 
 }
