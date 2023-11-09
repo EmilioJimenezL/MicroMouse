@@ -17,7 +17,7 @@ public class Main {
         Punto inicio = laberinto.encontrarInicio();
         Punto fin[] = laberinto.encontrarFin();
         Raton raton = new Raton(mapa, laberinto.convertirAFlood(), inicio, laberinto.encontrarFinalMasCercano());
-        List<Punto> lista = raton.encontrarMejorCamino();
+        List<Punto> lista = raton.encontrarMejorCamino2();
         List<String> movimientos = Utils.puntosAMovimientos(lista);
         for (int i = 0; i < lista.size(); i++) {
             System.out.println(lista.get(i));
@@ -26,5 +26,9 @@ public class Main {
             System.out.println(movimientos.get(i));
         }
         Utils.escribirMovimientos(movimientos, "test");
+
+//        System.out.println("FIN: " + raton.isEnd(new Punto(5, 5)));
+//        System.out.println("FIN: " + raton.isEnd(new Punto(0, 0)));
+//        System.out.println("FIN: " + raton.isEnd(new Punto(-10, 0)));
     }
 }
